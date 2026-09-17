@@ -1,0 +1,35 @@
+# -------------------------------------------------------------
+# Stage 1: Compile Servlets & Assemble Web Application
+# -------------------------------------------------------------
+FROM eclipse-temurin:21-jdk-alpine AS builder
+WORKDIR /build
+
+# Copy web files and Java source files
+COPY src/main/webapp /build/webapp
+COPY src/main/java /build/src
+
+# Create WEB-INF directories
+RUN mkdir -p /build/webapp/WEB-INF/classes /build/webapp/WEB-INF/lib /build/lib
+
+# Download Servlet 6.0 API (compilation) and PostgreSQL JDBC driver (runtime)
+ADD https://repo1.maven.org/maven2/jakarta/servlet/jakarta.servlet-api/6.0.0/jakarta.servlet-api-6.0.0.jar /build/lib/
+ADD https://repo1.maven.org/maven2/org/postgresql/postgresql/42.7.3/postgresql-42.7.3.jar /build/webapp/WEB-INF/lib/
+
+# Compile all Servlets into WEB-INF/classes
+RUN javac -cp "/build/lib/*:/build/webapp/WEB-INF/lib/*" -d /build/webapp/WEB-INF/classes $(find /build/src -name "*.java")
+
+# -------------------------------------------------------------
+# Stage 2: Deploy to Apache Tomcat 11 Runtime
+# -------------------------------------------------------------
+FROM tomcat:11.0-jdk21-openjdk-slim
+
+# Remove default Tomcat demo webapps
+RUN rm -rf /usr/local/tomcat/webapps/*
+
+# Copy assembled application directly into ROOT context
+COPY --from=builder /build/webapp /usr/local/tomcat/webapps/ROOT
+
+EXPOSE 8080
+
+# Inline port replacement and start (avoids script execution errors)
+CMD ["sh", "-c", "sed -i 's/port=\"8080\"/port=\"'\"${PORT:-8080}\"'\"/g' /usr/local/tomcat/conf/server.xml && catalina.sh run"]

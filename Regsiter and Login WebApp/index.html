@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subhadip's Dynamic Java Portal</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            /* Background matching the portal theme */
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)),
+                        url('https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat fixed;
+        }
+
+        .welcome-card {
+            width: 100%;
+            max-width: 520px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 36px 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: #e0e7ff;
+            color: #4338ca;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 14px;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #0f172a;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.25;
+        }
+
+        p.description {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        /* Developer Section */
+        .developer-section {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-align: left;
+        }
+
+        .developer-info span {
+            display: block;
+        }
+
+        .developer-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            color: #94a3b8;
+        }
+
+        .developer-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .tech-pill {
+            background-color: #e2e8f0;
+            color: #475569;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 6px;
+        }
+
+        /* Action Buttons */
+        .button-group {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px 18px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: inline-block;
+            text-align: center;
+            border: 2px solid transparent;
+        }
+
+        .btn-login {
+            background-color: #4f46e5;
+            color: #ffffff;
+        }
+
+        .btn-login:hover {
+            background-color: #4338ca;
+        }
+
+        .btn-register {
+            background-color: transparent;
+            color: #4f46e5;
+            border-color: #4f46e5;
+        }
+
+        .btn-register:hover {
+            background-color: #eef2ff;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        @media (max-width: 480px) {
+            .welcome-card {
+                padding: 28px 20px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="welcome-card">
+        <span class="badge">Java Dynamic Web Project</span>
+        <h1>Welcome to My Portal</h1>
+        <p class="description">
+            A dynamic web application featuring user authentication powered by a Java backend, JSP frontend, and real-time database connectivity via JDBC.
+        </p>
+
+        <!-- Developer Details Section -->
+        <div class="developer-section">
+            <div class="developer-info">
+                <span class="developer-label">Developer</span>
+                <span class="developer-name">Subhadip Biswas</span>
+            </div>
+            <span class="tech-pill">Java &bull; JSP &bull; JDBC</span>
+        </div>
+
+        <div class="button-group">
+            <button type="button" class="btn btn-login" onclick="window.location.href='indexLogin.jsp'">Log In</button>
+            <button type="button" class="btn btn-register" onclick="window.location.href='indexRegister.jsp'">Register</button>
+        </div>
+    </div>
+
+</body>
+</html>
